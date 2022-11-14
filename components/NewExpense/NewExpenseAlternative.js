@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-
-import ExpenseForm from './ExpenseForm';
+import NewExpenseView from "./NewExpenseView";
+// import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
 const NewExpense = (props) => {
@@ -13,28 +13,28 @@ const NewExpense = (props) => {
         }
         console.log(expenseData)
         props.onAddExpense(expenseData);
-        setActivated(false)
+
     }
 
-    const statusHandler = () =>{
-        setActivated(false)
+    const statusHandler = (enteredStatus) =>{
+        setActivated(enteredStatus)
     }
     
 
-    const clickHandler = (event) => {
-        event.preventDefault();
-        // console.log('test click')
-        setActivated(true)
-    }
+    // const clickHandler = (event) => {
+    //     event.preventDefault();
+    //     console.log('test click')
+    //     setActivated(true)
+    // }
 
     return (
         <div className='new-expense'>
-            {!activated && <button onClick={clickHandler}>Add New Expense</button>}
-            {activated && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onActivatedStatus={statusHandler}/>}
+            <NewExpenseView currentStatus={activated} onActivatedStatus={statusHandler} onSaveExpenseData={saveExpenseDataHandler}/>
+            {/* <button onClick={clickHandler}>Add New Expense</button> */}
         </div>
     )
 
-/* Long version - the one above is condensed */
+
     // if (activated === true) {
     //     return (
     //         <div className='new-expense'>

@@ -1,16 +1,16 @@
 import React, {useState} from "react";
-import NewExpense from "./NewExpense";
+// import NewExpense from "./NewExpense";
 import ExpenseForm from "./ExpenseForm";
 import "./NewExpense.css";
 
 const NewExpenseView = (props) => {
-    
+  const [activated, setActivated] = useState(props.currentStatus);
+
 
 
     const clickHandler = (event) => {
         event.preventDefault();
-        console.log(props.activated)
-        props.activated = true;
+        props.onActivatedStatus(true)
     }
 
     const saveExpenseDataHandler = (enteredExpenseData) => {
@@ -19,15 +19,22 @@ const NewExpenseView = (props) => {
             id: Math.random().toString()
         }
         console.log(expenseData)
-        props.onAddExpense(expenseData);
+        // props.onAddExpense(expenseData);
+        props.onSaveExpenseData(expenseData);
     }
-  if (props.activated === true) {
+
+    const statusHandler = (enteredStatus) =>{
+      // setActivated(enteredStatus)
+      props.onActivatedStatus(enteredStatus)
+  }
+
+  if (props.currentStatus === true) {
     return (
-        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onActivatedStatus={statusHandler}/>
     );
   }
 
-  if (props.activated === false) {
+  if (props.currentStatus === false) {
     return (
         <button onClick={clickHandler}>Add New Expense</button>
     )
