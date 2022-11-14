@@ -34,6 +34,7 @@ const ExpenseForm = (props) => {
     setEnteredAmount('');
     setEnteredDate('');
     
+    props.onActivatedStatus(false);
   };
 
   return (
@@ -53,6 +54,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
